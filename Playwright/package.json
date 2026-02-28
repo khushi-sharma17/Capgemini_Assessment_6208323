@@ -1,14 +1,5 @@
 {
-  "name": "assessment_capgemini",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
-    "@types/node": "^25.3.2"
+    "@playwright/test": "^1.58.2"
   }
 }
