@@ -9,5 +9,5 @@ test("task2",async({page})=>{
     await page.locator('//input[@id="email"]').fill("khushiastrogeek@gmail.com");
     await page.locator('//input[@id="password"]').fill("Password123");
     await page.keyboard.press("Enter");
-    await page.screenshot({path:"screenshot/task3.png"});
+    await page.screenshot({path:'screenshot/question_3_${Date.now()}.png'});    
 });

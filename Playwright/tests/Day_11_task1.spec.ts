@@ -16,4 +16,6 @@ test('fetch first product', async ({ page }) => {
 
   console.log("Name:", name?.trim());
   console.log("Price:", price?.trim());
+
+  await page.screenshot({path:'screenshot/question_1_${Date.now()}.png'});    
 });
