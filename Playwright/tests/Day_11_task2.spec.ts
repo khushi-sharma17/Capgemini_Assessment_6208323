@@ -1,3 +1,12 @@
 import {test} from "@playwright/test"
 
-test
+test("task2",async({page})=>{
+    await page.goto("https://www.flipkart.com/");
+    await page.locator('//div/input').first().fill("Phones");
+    await page.keyboard.press("Enter");
+    await page.locator('//label/input').first().click();
+    console.log(await page.locator('//div[@class="QiMO5r"]/div').nth(3).textContent());
+    await page.screenshot({path:"screenshot/task2.png"});
+    
+    
+});

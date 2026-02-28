@@ -14,4 +14,6 @@ test('fetch first product', async ({ page }) => {
     '(//div[@data-component-type="s-search-result"]//span[@class="a-price-whole"])[1]'
   ).textContent();
 
+  console.log("Name:", name?.trim());
+  console.log("Price:", price?.trim());
 });
