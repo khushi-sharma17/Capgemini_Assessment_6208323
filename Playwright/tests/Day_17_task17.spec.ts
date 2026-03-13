@@ -6,6 +6,7 @@ test("Verify product details in new tab", async ({ page, context }) => {
 
   await page.locator("#twotabsearchtextbox").fill("Samsung Mobile");
   await page.locator("#nav-search-submit-button").click();
+  // This ensures the page is ready before clicking.
 
   await page.waitForSelector("div.s-main-slot");
 
