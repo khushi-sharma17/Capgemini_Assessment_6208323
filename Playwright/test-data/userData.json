@@ -1,0 +1,9 @@
+{
+  "user": {
+    "firstName": "Khushi",
+    "lastName": "Sharma",
+    "username": "khushi_test01",
+    "password": "Password@123"
+  },
+  "book": "Git Pocket Guide"
+}

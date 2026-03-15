@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "username": "testuser1",
+      "password": "Password@123",
+      "newFirstName": "Rahul",
+      "newLastName": "Verma",
+      "email": "rahul.verma@gmail.com"
+    },
+    {
+      "username": "testuser2",
+      "password": "Password@123",
+      "newFirstName": "Anita",
+      "newLastName": "Sharma",
+      "email": "anita.sharma@gmail.com"
+    }
+  ]
+}

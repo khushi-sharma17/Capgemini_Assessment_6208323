@@ -1,0 +1,24 @@
+{
+  "students": [
+    {
+      "firstName": "Khushi",
+      "lastName": "Sharma",
+      "email": "khushi@gmail.com",
+      "gender": "Female",
+      "phone": "9876543210",
+      "address": "Jaipur Rajasthan",
+      "state": "NCR",
+      "city": "Delhi"
+    },
+    {
+      "firstName": "Rahul",
+      "lastName": "Verma",
+      "email": "rahul@gmail.com",
+      "gender": "Male",
+      "phone": "9876543211",
+      "address": "Mumbai India",
+      "state": "NCR",
+      "city": "Delhi"
+    }
+  ]
+}
