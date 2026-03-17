@@ -1,38 +1,30 @@
-import { test } from "@playwright/test"
-import HomePage from "../pages/home.page"
-import StorePage from "../pages/store.page"
-import CartPage from "../pages/cart.page"
+import {test} from "@playwright/test"
+import flipkart from "../pages/flipkart.page"
+import path from "path";
 import fs from "fs"
-import path from "path"
 
-const data = JSON.parse(
-fs.readFileSync(
-path.join(__dirname,"../test-data/data.json"),
-"utf-8"
-))
+let fkart = JSON.parse(fs.readFileSync(path.join(__dirname,"../test-data/data.json")));
 
-test("Flipkart Gudi Padwa Store Purchase", async ({ page }) => {
 
-    const home = new HomePage(page)
-    const store = new StorePage(page)
-    const cart = new CartPage(page)
-
-    await home.goto(data.url)
-
-    await home.openGudiPadwaStore()
-
-    await store.selectProduct(data.productIndex1)
-    await store.addToCart()
-
-    await page.goBack()
-
-    await store.selectProduct(data.productIndex2)
-    await store.addToCart()
-
-    await cart.increaseQuantityForAll()
-
-    await cart.placeOrder()
-
-    await page.screenshot({path : `screenshot/flipkart-automation`})
-
+test("flipkart",async({page})=>{
+    let flipkartsite=new flipkart();
+    await flipkartsite.load_flipkart(page,fkart.url);
+    await page.locator('//span[.="✕"]').click();
+    await flipkartsite.gudipadwa(page);
+    await flipkartsite.gudicloth(page);
+    let [page2] = await Promise.all([page.waitForEvent('popup'), flipkartsite.clickproduct(page,5)]);
+    await page2.waitForTimeout(2000);
+    await flipkartsite.add_cart(page2);
+    page.bringToFront();
+    let [page3] = await Promise.all([page.waitForEvent('popup'), flipkartsite.clickproduct(page,3)]);
+    await page3.waitForTimeout(2000);
+    await flipkartsite.add_cart(page3);
+    page.bringToFront();
+    await flipkartsite.to_cart(page);
+    await page.waitForTimeout(2000);
+    await flipkartsite.quantity(page,1,2);
+    await flipkartsite.quantity(page,2,3);
+    await page.screenshot({path:"screenshot/task1_1.png"})
+    await flipkartsite.place_order(page);
+    await page.screenshot({path:"screenshot/task1_2.png"})
 })
