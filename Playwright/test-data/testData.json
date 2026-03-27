@@ -3,10 +3,11 @@
   "customer": {
     "firstName": "Khushi",
     "lastName": "Sharma",
-    "postCode": "313001"
+    "postCode": "302039"
   },
   "transaction": {
+    "withdraw" : "500",
     "depositAmount": "1000",
-    "withdrawAmount": "400"
+    "afterWithdraw": "500"
   }
 }

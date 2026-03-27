@@ -1,38 +1,36 @@
-import { test, expect } from '@playwright/test';
-import { BankingPage } from '../Pages/banking.page';
-import testData from '../test-data/testData.json';
+import {expect, test} from "@playwright/test"
+import Login from "../Pages/login.page"
+import Account from "../Pages/account.page"
+import path from "path"
+import fs from "fs"
 
-test('E2E Banking Flow', async ({ page }) => {
-  const banking = new BankingPage(page);
+const data = fs.readFileSync(path.join(__dirname, "../test-data/testData.json"), 'utf-8')
+const jsonData = JSON.parse(data)
 
-  const fullName = `${testData.customer.firstName} ${testData.customer.lastName}`;
 
-  await banking.goto(testData.url);
+// why we have done this ?
+test.use({
+  launchOptions : {
+    slowMo : 500
+  }
+})
 
-  await banking.loginAsManager();
 
-  await banking.addCustomer(
-    testData.customer.firstName,
-    testData.customer.lastName,
-    testData.customer.postCode
-  );
+test("Banking Application", async({page}) => {
+  page.on("dialog", async d => {
+    await d.accept();
+  })
 
-  await banking.openAccount(fullName);
+  test.slow()
+  await page.goto(jsonData.url)
 
-  await banking.switchToCustomerLogin();
+  const login = new Login(page);
+  await login.addNewCustomer();
+  await login.createAccount();
 
-  await banking.loginCustomer(fullName);
+  const account = new Account(page);
+  await account.accountLogin()
+  await account.depositAmount()
+  await account.withdrawAmount()
 
-  await banking.deposit(testData.transaction.depositAmount);
-
-  await banking.withdraw(testData.transaction.withdrawAmount);
-
-  const balance = await banking.getBalance();
-  const expectedBalance =
-    Number(testData.transaction.depositAmount) -
-    Number(testData.transaction.withdrawAmount);
-
-  expect(balance).toBe(expectedBalance);
-
-  await banking.logout();
-});
+})
